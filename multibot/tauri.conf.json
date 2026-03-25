@@ -1,0 +1,30 @@
+{
+    "$schema": "https://v2.tauri.app/schema.json",
+    "productName": "MultiBot",
+    "version": "0.1.0",
+    "identifier": "com.multibot.app",
+    "build": {
+        "frontendDist": "dist"
+    },
+    "bundle": {
+        "active": true,
+        "targets": "all"
+    },
+    "app": {
+        "withGlobalTauri": true,
+        "windows": [
+            {
+                "title": "MultiBot",
+                "width": 550,
+                "height": 700,
+                "label": "main",
+                "resizable": true,
+                "center": true,
+                "devtools": true
+            }
+        ],
+        "security": {
+            "capabilities": []
+        }
+    }
+}

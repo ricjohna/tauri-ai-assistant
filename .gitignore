@@ -1,0 +1,27 @@
+# User data (sensitive - do not commit)
+user_memory.json
+user_settings.json
+config.json
+multibot/user_memory.json
+multibot/user_settings.json
+multibot/config.json
+
+# Build outputs
+target/
+multibot/target/
+*.exe
+*.msi
+
+# Python old files
+__pycache__/
+*.pyc
+gui_chatbot.py
+config.py
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

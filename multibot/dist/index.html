@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiBot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-title">
+                <span class="char-icon">✧</span>
+                <span id="char-name">MultiBot</span>
+            </div>
+            <div class="tab-buttons">
+                <button id="tab-chat" class="tab-btn active">Chat</button>
+                <button id="tab-settings" class="tab-btn">Settings</button>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+        </header>
+
+        <div id="chat-view" class="view-container">
+            <div class="chat-area" id="chat-area">
+            </div>
+
+            <div class="thinking-indicator" id="thinking-indicator">
+                <span class="thinking-dots">●○○</span>
+                <span class="thinking-text">Thinking...</span>
+            </div>
+
+            <div class="bottom-section">
+                <div class="status-bar">
+                    <span id="status-text" class="status-idle">Idle</span>
+                    <label class="debug-toggle">
+                        <input type="checkbox" id="debug-checkbox">
+                        <span>Debug</span>
+                    </label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-view" class="view-container hidden">
+            <div class="settings-content">
+                <h2>Settings</h2>
+                
+                <div class="settings-section">
+                    <h3>API Configuration</h3>
+                    <div class="form-group">
+                        <label for="api-key">OpenRouter API Key</label>
+                        <input type="password" id="api-key" placeholder="sk-or-v1-...">
+                        <small>Get a free API key at <a href="https://openrouter.ai" target="_blank">openrouter.ai</a></small>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Bot Personality</h3>
+                    <div class="form-group">
+                        <label for="bot-name">Bot Name</label>
+                        <input type="text" id="bot-name" placeholder="MultiBot">
+                    </div>
+                    <div class="form-group">
+                        <label for="bot-creator">Creator</label>
+                        <input type="text" id="bot-creator" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="bot-greeting">Greeting Message</label>
+                        <input type="text" id="bot-greeting" placeholder="Hello! I'm your AI assistant...">
+                    </div>
+                    <div class="form-group">
+                        <label for="bot-system-prompt">System Prompt</label>
+                        <textarea id="bot-system-prompt" rows="4" placeholder="You are a helpful AI assistant..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bot-description">Description</label>
+                        <input type="text" id="bot-description" placeholder="A helpful AI assistant">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Speaking Style</h3>
+                    <div class="form-row">
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="use-emoji" checked>
+                            <label for="use-emoji">Use Emojis</label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="casual-speech" checked>
+                            <label for="casual-speech">Casual Speech</label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="exclamation-heavy" checked>
+                            <label for="exclamation-heavy">Exclamation Heavy</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Catchphrases</h3>
+                    <div class="form-group">
+                        <label for="catchphrases">Comma-separated phrases</label>
+                        <input type="text" id="catchphrases" placeholder="Nyaa~, Hehe!, Let's go!">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Idle Messages</h3>
+                    <div class="form-group">
+                        <label for="idle-messages">Comma-separated messages</label>
+                        <textarea id="idle-messages" rows="3" placeholder="Heyo~! Still here?"></textarea>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Emotional Responses</h3>
+                    <div class="form-group">
+                        <label for="excited-response">Excited Response</label>
+                        <input type="text" id="excited-response" placeholder="That's awesome!">
+                    </div>
+                    <div class="form-group">
+                        <label for="sad-response">Sad Response</label>
+                        <input type="text" id="sad-response" placeholder="I'm here for you...">
+                    </div>
+                    <div class="form-group">
+                        <label for="confused-response">Confused Response</label>
+                        <input type="text" id="confused-response" placeholder="Could you explain that?">
+                    </div>
+                    <div class="form-group">
+                        <label for="angry-response">Angry Response</label>
+                        <input type="text" id="angry-response" placeholder="Take a deep breath...">
+                    </div>
+                    <div class="form-group">
+                        <label for="love-response">Love Response</label>
+                        <input type="text" id="love-response" placeholder="Thank you!">
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button id="save-settings-btn" class="btn-primary">Save Settings</button>
+                    <span id="save-status" class="save-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="setup-overlay" id="setup-overlay">
+        <div class="setup-modal">
+            <h1>Welcome to MultiBot!</h1>
+            <p>To get started, please enter your OpenRouter API key.</p>
+            <div class="form-group">
+                <label for="setup-api-key">API Key</label>
+                <input type="password" id="setup-api-key" placeholder="sk-or-v1-...">
+            </div>
+            <p class="setup-help">Get a free API key at <a href="https://openrouter.ai" target="_blank">openrouter.ai</a></p>
+            <button id="setup-save-btn" class="btn-primary">Get Started</button>
+        </div>
+    </div>
+
+    <div class="debug-window" id="debug-window">
+        <div class="debug-header">
+            <span>Debug Console</span>
+            <button class="debug-close" id="debug-close">×</button>
+        </div>
+        <div class="debug-content" id="debug-content">
+        </div>
+        <button class="debug-clear" id="debug-clear">Clear</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

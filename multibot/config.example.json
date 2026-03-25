@@ -1,0 +1,18 @@
+{
+    "openrouter": {
+        "api_key": "YOUR_API_KEY_HERE",
+        "models": [
+            "stepfun/step-3.5-flash:free",
+            "nvidia/nemotron-3-nano-30b-a3b:free",
+            "meta-llama/llama-3.3-70b-instruct:free"
+        ],
+        "retry_delay_secs": 2,
+        "request_timeout_secs": 60
+    },
+    "app": {
+        "site_url": "https://yoursite.com",
+        "site_name": "MultiBot",
+        "idle_timeout_secs": 20,
+        "history_limit": 10
+    }
+}
